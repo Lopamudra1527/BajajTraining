@@ -1,0 +1,169 @@
+Last login: Mon Jan 16 10:05:27 on console
+/Library/PostgreSQL/15/scripts/runpsql.sh; exit
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+L-XNTL4N67CH:~ lopamudrapanda$ /Library/PostgreSQL/15/scripts/runpsql.sh; exit
+Server [localhost]: 
+Database [postgres]: 
+Port [5432]: 
+Username [postgres]: postgres
+Password for user postgres: 
+psql (15.1)
+Type "help" for help.
+
+postgres=# \c dbfinserv
+You are now connected to database "dbfinserv" as user "postgres".
+dbfinserv=# select * from employee;
+ id |   name    | age |             adress             
+----+-----------+-----+--------------------------------
+  1 | Lopa      |  20 | Bengaluru                     
+  2 | Mukesh    |  21 | Ooty                          
+  3 | Joshita   |  21 | Salem                         
+  4 | Kiruthick |  21 | Salem                         
+  5 | Chaitanya |  21 | Guntur                        
+  6 | Viswanath |  21 | AP                            
+  7 | Nandhu    |  21 | Bengaluru                     
+(7 rows)
+
+dbfinserv=# select * from department;
+ dept_name | dept_id 
+-----------+---------
+ cse       |       1
+ ece       |       2
+ cse       |       3
+ mech      |       4
+ cse       |       5
+(5 rows)
+
+dbfinserv=# select e.id,e.name,d.dept_name from employee1 e left join department d on d.dept_id=e.dept_id;
+ id |   name    | dept_name 
+----+-----------+-----------
+  1 | Lopa      | cse
+  3 | Joshita   | ece
+  4 | Chaitnya  | cse
+  5 | Kiruthick | mech
+  2 | Mukesh    | 
+(5 rows)
+
+dbfinserv=# select * from employee1;
+ id |   name    | salary | dept_id 
+----+-----------+--------+---------
+  1 | Lopa      |  35000 |       1
+  3 | Joshita   |  35000 |       2
+  4 | Chaitnya  |  35000 |       3
+  5 | Kiruthick |  35000 |       4
+  2 | Mukesh    |  35000 |        
+(5 rows)
+
+dbfinserv=# select e.id,e.name,d.dept_name from employee1 e right join department d on d.dept_id=e.dept_id;
+ id |   name    | dept_name 
+----+-----------+-----------
+  1 | Lopa      | cse
+  3 | Joshita   | ece
+  4 | Chaitnya  | cse
+  5 | Kiruthick | mech
+    |           | cse
+(5 rows)
+
+dbfinserv=# select e.id,e.name,d.dept_name from employee1 e cross join departmen
+t d on d.dept_id=e.dept_id;
+ERROR:  syntax error at or near "on"
+LINE 1: ...ept_name from employee1 e cross join department d on d.dept_...
+                                                             ^
+dbfinserv=# select e.id,e.name,d.dept_name from employee1 e cross join department d;
+ id |   name    | dept_name 
+----+-----------+-----------
+  1 | Lopa      | cse
+  3 | Joshita   | cse
+  4 | Chaitnya  | cse
+  5 | Kiruthick | cse
+  2 | Mukesh    | cse
+  1 | Lopa      | ece
+  3 | Joshita   | ece
+  4 | Chaitnya  | ece
+  5 | Kiruthick | ece
+  2 | Mukesh    | ece
+  1 | Lopa      | cse
+  3 | Joshita   | cse
+  4 | Chaitnya  | cse
+  5 | Kiruthick | cse
+  2 | Mukesh    | cse
+  1 | Lopa      | mech
+  3 | Joshita   | mech
+  4 | Chaitnya  | mech
+  5 | Kiruthick | mech
+  2 | Mukesh    | mech
+  1 | Lopa      | cse
+  3 | Joshita   | cse
+  4 | Chaitnya  | cse
+  5 | Kiruthick | cse
+  2 | Mukesh    | cse
+(25 rows)
+
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# select e.name, d.dept_id from employee1 e inner join employee1 d on e.dept_id=d.dept_id;
+   name    | dept_id 
+-----------+---------
+ Lopa      |       1
+ Joshita   |       2
+ Chaitnya  |       3
+ Kiruthick |       4
+(4 rows)
+
+dbfinserv=# select e.name, d.dept_id from employee1 e inner join employee1 d on
+e.dept_id=d.dept_id order by name;
+   name    | dept_id 
+-----------+---------
+ Chaitnya  |       3
+ Joshita   |       2
+ Kiruthick |       4
+ Lopa      |       1
+(4 rows)
+
+dbfinserv=# select e.name, d.dept_id from employee1 e left  join employee1 d on
+e.dept_id=d.dept_id order by name;
+   name    | dept_id 
+-----------+---------
+ Chaitnya  |       3
+ Joshita   |       2
+ Kiruthick |       4
+ Lopa      |       1
+ Mukesh    |        
+(5 rows)
+
+dbfinserv=# select e.name, d.dept_id from employee1 e cross join employee1 d ord
+er by name;
+   name    | dept_id 
+-----------+---------
+ Chaitnya  |        
+ Chaitnya  |       4
+ Chaitnya  |       1
+ Chaitnya  |       3
+ Chaitnya  |       2
+ Joshita   |       3
+ Joshita   |       1
+ Joshita   |       2
+ Joshita   |       4
+ Joshita   |        
+ Kiruthick |       1
+ Kiruthick |        
+ Kiruthick |       4
+ Kiruthick |       3
+ Kiruthick |       2
+ Lopa      |       1
+ Lopa      |       2
+ Lopa      |       3
+ Lopa      |       4
+ Lopa      |        
+ Mukesh    |       1
+ Mukesh    |       2
+ Mukesh    |       3
+ Mukesh    |       4
+ Mukesh    |        
+(25 rows)
+
+dbfinserv=# 

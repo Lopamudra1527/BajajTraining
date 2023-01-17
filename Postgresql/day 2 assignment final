@@ -1,0 +1,1267 @@
+Last login: Mon Jan 16 22:44:13 on ttys001
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+L-XNTL4N67CH:~ lopamudrapanda$ /Library/PostgreSQL/15/scripts/runpsql.sh; exit
+Server [localhost]: 
+Database [postgres]: 
+Port [5432]: 
+Username [postgres]: postgres
+Password for user postgres: 
+psql (15.1)
+Type "help" for help.
+
+postgres=# \c dbfinserv
+You are now connected to database "dbfinserv" as user "postgres".
+dbfinserv=# create table User(userId int, first_name text, last_name text, adress text, mobile text, email text, username text, password char(30));
+ERROR:  syntax error at or near "User"
+LINE 1: create table User(userId int, first_name text, last_name tex...
+                     ^
+dbfinserv=# create table User(userId int primary key, first_name text, last_name
+ text, adress text, mobile text, email text, username text, password char(30));
+ERROR:  syntax error at or near "User"
+LINE 1: create table User(userId int primary key, first_name text, l...
+                     ^
+dbfinserv=# \d
+           List of relations
+ Schema |    Name    | Type  |  Owner   
+--------+------------+-------+----------
+ public | department | table | postgres
+ public | emp        | table | postgres
+ public | employee   | table | postgres
+ public | employee1  | table | postgres
+ public | test       | table | postgres
+(5 rows)
+
+dbfinserv=# create table User (userId int primary key, first_name text, last_name text, adress text, mobile text, email text, username text, password char(30));
+
+ERROR:  syntax error at or near "User"
+LINE 1: create table User (userId int primary key, first_name text, ...
+                     ^
+dbfinserv=# create table user (userId int primary key, first_name text, last_name text, adress text, mobile text, email text, username text, password char(30));
+
+ERROR:  syntax error at or near "user"
+LINE 1: create table user (userId int primary key, first_name text, ...
+                     ^
+dbfinserv=# create table Student(Stu_id int, Stu_Name text, Stu_Age int, Stu_address char(30)); 
+CREATE TABLE
+dbfinserv=# create table User(userid int, First_Name text,Last_Name text, adress text, mobile text, email text, username text, password char(30));
+ERROR:  syntax error at or near "User"
+LINE 1: create table User(userid int, First_Name text,Last_Name text...
+                     ^
+dbfinserv=# create table user(user_id int, name text);
+ERROR:  syntax error at or near "user"
+LINE 1: create table user(user_id int, name text);
+                     ^
+dbfinserv=# create table users(user_id int);
+CREATE TABLE
+dbfinserv=# create table Users(userid int, First_Name text,Last_Name text, adress 
+ERROR:  relation "users" already exists
+dbfinserv=# drop table users;
+DROP TABLE
+dbfinserv=# create table Users(userid int, First_Name text,Last_Name text, adress text, mobile text, email text, username text, password char(30));
+CREATE TABLE
+dbfinserv=# create table Referral(referalId int, First_name text, Last_name text, mobile text, email text, user_id int, dor date, ref_points int, status text);
+CREATE TABLE
+dbfinserv=# create table Customer(customerId int primary key,first_name text, last_name text, email text, mobile text);
+CREATE TABLE
+dbfinserv=# create table buyerDetails(customerId int, userId int, purhcase_date
+date, productName text);
+CREATE TABLE
+dbfinserv=# alter table Users add primary key(userid);
+ALTER TABLE
+dbfinserv=# alter table Referral add constraint uid foreign key (user_id) references Users(userId);
+ALTER TABLE
+dbfinserv=# alter table buyerDetails add constraint cid foreign key (customerId) references Customer(customerId);
+ALTER TABLE
+dbfinserv=# insert into Users values(1,'ram','mohan','pune','987654321','abc@gmail.com','ram@mohan','@ram'),(2,'priya','waikar','banglore','976543218','def@gmail.com','priya@waikar','@priya'),(3,'neha','agarwal','hyderabad','965432178','ghi@gmail.com','neha@agarwal','@neha'),(4,'amit','shah','chennai','912345678','jkl@gmail.com','amit@shah','@amit'),(5,'sunil','shetty','lucknow','945678321',mno@gmail.com,'sumil@shetty','@sunil');
+ERROR:  column "mno" does not exist
+LINE 1: ...@amit'),(5,'sunil','shetty','lucknow','945678321',mno@gmail....
+                                                             ^
+dbfinserv=# insert into Users values(1,'ram','mohan','pune','987654321','abc@gmail.com','ram@mohan','@ram'),(2,'priya','waikar','banglore','976543218','def@gmail.com','priya@waikar','@priya'),(3,'neha','agarwal','hyderabad','965432178','ghi@gmail.com','neha@agarwal','@neha'),(4,'amit','shah','chennai','912345678','jkl@gmail.com','amit@shah','@amit'),(5,'sunil','shetty','lucknow','945678321','mno@gmail.com','sumil@shetty','@sunil');
+INSERT 0 5
+dbfinserv=# insert into Referral values(101,'Lopa','mudra','8270286253','lopa@gmail.com','3',23/03/2022,30,'done');
+ERROR:  column "dor" is of type date but expression is of type integer
+LINE 1: ...,'Lopa','mudra','8270286253','lopa@gmail.com','3',23/03/2022...
+                                                             ^
+HINT:  You will need to rewrite or cast the expression.
+dbfinserv=# insert into Referral values(101,'Lopa','mudra','8270286253','lopa@gmail.com','3','2022-05-23',30,'done');
+dbfinserv=# 
+dbfinserv=# insert into Referral values(102,'Kiruthick','Raja','9843433721','kiru@g
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# insert into Referral values(102,'Kiruthuck','Raja','9843433721','kiru@gmail.com','1','2022-07-3',20,'done'),(103,'Mukesh','s','9671234501','mukesh@gmail.com','2','2022-09-05',40,'done'),(104,'Joshita','Ravi','912345897','joshi@gmail.com','4','2022-01-07',89,'done'),(105,'Viswa','A','8120876532','viswa@gmail.com','5','2022-10-04',49,'done');
+INSERT 0 4
+dbfinserv=# insert into Customer values(501,'raj','kiran','raj@gmail.com','987654123'),(502,'akshay','kumar','aks@gmail.com','8901234567'),(503,'kareena','kapoor','kar@gmail.com','9234567810'),(504,'priya','darshini','priya@gmail.com','923487610'),(505,'bhavya','sri','sri@gmail.com','9216783045');
+INSERT 0 5
+dbfinserv=# insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10);
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10);
+ERROR:  syntax error at or near "2022"
+LINE 5: insert into buyerDetails values(505,3,'2022-09-13','pen'),(5...
+                                               ^
+dbfinserv=# insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10);
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+dbfinserv'# insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10);
+ERROR:  syntax error at or near "2022"
+LINE 5: insert into buyerDetails values(505,3,'2022-09-13','pen'),(5...
+                                               ^
+dbfinserv=# drop table buyerDetails;
+DROP TABLE
+dbfinserv=# create table buyerDetails(customerId int, userId int, purhcase_date date, productName text);
+CREATE TABLE
+dbfinserv=# alter table buyerDetails add constraint cid foreign key (customerId) references Customer(customerId);
+ALTER TABLE
+dbfinserv=# insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10);
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+dbfinserv'# insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10);
+ERROR:  syntax error at or near "2022"
+LINE 5: insert into buyerDetails values(505,3,'2022-09-13','pen'),(5...
+                                               ^
+dbfinserv=# insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10);
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+dbfinserv'# \c dbfinserv
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# 
+dbfinserv'# insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10);
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10);
+ERROR:  syntax error at or near "2022"
+LINE 5: insert into buyerDetails values(505,3,'2022-09-13','pen'),(5...
+                                               ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+\c dbfinserv
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10);
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+ERROR:  syntax error at or near "2022"
+LINE 2: insert into buyerDetails values(505,3,'2022-09-13','pen'),(5...
+                                               ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+invalid integer value "buyerDetails" for connection option "port"
+Previous connection kept
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+\c dbfinserv
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10);
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10','laptop');
+ERROR:  syntax error at or near "2022"
+LINE 5: insert into buyerDetails values(505,3,'2022-09-13','pen'),(5...
+                                               ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+INSERT 0 5
+dbfinserv=# drop table users;
+ERROR:  cannot drop table users because other objects depend on it
+DETAIL:  constraint uid on table referral depends on table users
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+dbfinserv=# drop table buyerDetails;
+DROP TABLE
+dbfinserv=# drop table referral;
+DROP TABLE
+dbfinserv=# drop table customer;
+DROP TABLE
+dbfinserv=# drop table users;
+DROP TABLE
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# create table Users(userid int, First_Name text,Last_Name text, adress text, mobile text, email text, username text, password char(30));
+CREATE TABLE
+dbfinserv=# create table Referral(referalId int, First_name text, Last_name text, mobile text, email text, user_id int, dor date, ref_points int, status text);
+CREATE TABLE
+dbfinserv=# create table Customer(customerId int primary key,first_name text, last_name text, email text, mobile text);
+CREATE TABLE
+dbfinserv=# create table buyerDetails(customerId int, userId int, purhcase_date date, productName text);
+CREATE TABLE
+dbfinserv=# alter table Users add primary key(userid);
+ALTER TABLE
+dbfinserv=# alter table Referral add constraint uid foreign key (user_id) references Users(userId);
+ALTER TABLE
+dbfinserv=# alter table buyerDetails add constraint cid foreign key (customerId) references Customer(customerId);
+ALTER TABLE
+dbfinserv=# insert into Users values(1,'ram','mohan','pune','987654321','abc@gmail.com','ram@mohan','@ram'),(2,'priya','waikar','banglore','976543218','def@gmail.com','priya@waikar','@priya'),(3,'neha','agarwal','hyderabad','965432178','ghi@gmail.com','neha@agarwal','@neha'),(4,'amit','shah','chennai','912345678','jkl@gmail.com','amit@shah','@amit'),(5,'sunil','shetty','lucknow','945678321','mno@gmail.com','sumil@shetty','@sunil');
+INSERT 0 5
+dbfinserv=# insert into Referral values(101,'Lopa','mudra','8270286253','lopa@gmail.com','3','2022-05-23',30,'done');
+INSERT 0 1
+dbfinserv=# insert into Referral values(102,'Kiruthuck','Raja','9843433721','kiru@gmail.com','1','2022-07-3',20,'done'),(103,'Mukesh','s','9671234501','mukesh@gmail.com','2','2022-09-05',40,'done'),(104,'Joshita','Ravi','912345897','joshi@gmail.com','4','2022-01-07',89,'done'),(105,'Viswa','A','8120876532','viswa@gmail.com','5','2022-10-04',49,'done');
+INSERT 0 4
+dbfinserv=# insert into Customer values(501,'raj','kiran','raj@gmail.com','987654123'),(502,'akshay','kumar','aks@gmail.com','8901234567'),(503,'kareena','kapoor','kar@gmail.com','9234567810'),(504,'priya','darshini','priya@gmail.com','923487610'),(505,'bhavya','sri','sri@gmail.com','9216783045');
+INSERT 0 5
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+\c dbfinserv
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10);
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10','laptop');
+ERROR:  syntax error at or near "2022"
+LINE 5: insert into buyerDetails values(505,3,'2022-09-13','pen'),(5...
+                                               ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+INSERT 0 5
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+\c dbfinserv
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10);
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10','laptop');
+ERROR:  syntax error at or near "2022"
+LINE 5: insert into buyerDetails values(505,3,'2022-09-13','pen'),(5...
+                                               ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+INSERT 0 5
+dbfinserv=# )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# 
+dbfinserv-# select count(ref_points) as total_number_of_points from referral;)
+ERROR:  syntax error at or near ")"
+LINE 1: )
+        ^
+dbfinserv-# )
+select count(ref_points) as total_number_of_points from referral;
+ERROR:  syntax error at or near ")"
+LINE 1: )
+        ^
+dbfinserv=# select sum(ref_points) as tot_num_of_pts from referral;
+ tot_num_of_pts 
+----------------
+            228
+(1 row)
+
+dbfinserv=# select c.customerId,c.first_name,c.last_name,c.mobile,c.email from customer c inner join buyerDetails b on text='lpatop';
+ERROR:  column "text" does not exist
+LINE 1: ...mail from customer c inner join buyerDetails b on text='lpat...
+                                                             ^
+dbfinserv=# select c.customerId,c.first_name,c.last_name,c.mobile,c.email from customer c inner join buyerDetails b on product='laptop'; 
+ERROR:  column "product" does not exist
+LINE 1: ...mail from customer c inner join buyerDetails b on product='l...
+                                                             ^
+dbfinserv=# select c.customerId,c.first_name,c.last_name,c.mobile,c.email from customer c inner join buyerDetails b on productName='laptop';
+ customerid | first_name | last_name |   mobile   |      email      
+------------+------------+-----------+------------+-----------------
+        501 | raj        | kiran     | 987654123  | raj@gmail.com
+        501 | raj        | kiran     | 987654123  | raj@gmail.com
+        502 | akshay     | kumar     | 8901234567 | aks@gmail.com
+        502 | akshay     | kumar     | 8901234567 | aks@gmail.com
+        503 | kareena    | kapoor    | 9234567810 | kar@gmail.com
+        503 | kareena    | kapoor    | 9234567810 | kar@gmail.com
+        504 | priya      | darshini  | 923487610  | priya@gmail.com
+        504 | priya      | darshini  | 923487610  | priya@gmail.com
+        505 | bhavya     | sri       | 9216783045 | sri@gmail.com
+        505 | bhavya     | sri       | 9216783045 | sri@gmail.com
+(10 rows)
+
+dbfinserv=# select c.customerId,c.first_name,c.last_name,c.mobile,c.email from customer c inner join buyerDetails b on productName='laptop' and c.customerId=b.customerId;
+ customerid | first_name | last_name |   mobile   |     email     
+------------+------------+-----------+------------+---------------
+        503 | kareena    | kapoor    | 9234567810 | kar@gmail.com
+        503 | kareena    | kapoor    | 9234567810 | kar@gmail.com
+(2 rows)
+
+dbfinserv=# select c.customerId,c.first_name,c.last_name,c.mobile,c.email from customer c inner join buyerDetails b on c.customerId=b.customerId;
+ customerid | first_name | last_name |   mobile   |      email      
+------------+------------+-----------+------------+-----------------
+        505 | bhavya     | sri       | 9216783045 | sri@gmail.com
+        501 | raj        | kiran     | 987654123  | raj@gmail.com
+        504 | priya      | darshini  | 923487610  | priya@gmail.com
+        502 | akshay     | kumar     | 8901234567 | aks@gmail.com
+        503 | kareena    | kapoor    | 9234567810 | kar@gmail.com
+        505 | bhavya     | sri       | 9216783045 | sri@gmail.com
+        501 | raj        | kiran     | 987654123  | raj@gmail.com
+        504 | priya      | darshini  | 923487610  | priya@gmail.com
+        502 | akshay     | kumar     | 8901234567 | aks@gmail.com
+        503 | kareena    | kapoor    | 9234567810 | kar@gmail.com
+(10 rows)
+
+dbfinserv=# select c.customerId,c.first_name,c.last_name,c.mobile,c.email from customer c inner join buyerDetails b on productName='laptop' and c.customerId=b.customerId;
+ customerid | first_name | last_name |   mobile   |     email     
+------------+------------+-----------+------------+---------------
+        503 | kareena    | kapoor    | 9234567810 | kar@gmail.com
+        503 | kareena    | kapoor    | 9234567810 | kar@gmail.com
+(2 rows)
+
+dbfinserv=# select * from customer;
+ customerid | first_name | last_name |      email      |   mobile   
+------------+------------+-----------+-----------------+------------
+        501 | raj        | kiran     | raj@gmail.com   | 987654123
+        502 | akshay     | kumar     | aks@gmail.com   | 8901234567
+        503 | kareena    | kapoor    | kar@gmail.com   | 9234567810
+        504 | priya      | darshini  | priya@gmail.com | 923487610
+        505 | bhavya     | sri       | sri@gmail.com   | 9216783045
+(5 rows)
+
+dbfinserv=# select * from buyerDetails;
+ customerid | userid | purhcase_date | productname 
+------------+--------+---------------+-------------
+        505 |      3 | 2022-09-13    | pen
+        501 |      1 | 2022-04-27    | book
+        504 |      2 | 2022-08-14    | pencil
+        502 |      5 | 2022-06-10    | guide
+        503 |      4 | 2022-10-10    | laptop
+        505 |      3 | 2022-09-13    | pen
+        501 |      1 | 2022-04-27    | book
+        504 |      2 | 2022-08-14    | pencil
+        502 |      5 | 2022-06-10    | guide
+        503 |      4 | 2022-10-10    | laptop
+(10 rows)
+
+dbfinserv=# drop table buyerDetails;
+DROP TABLE
+dbfinserv=# create table buyerDetails(customerId int, userId int, purhcase_date date, productName text);
+CREATE TABLE
+dbfinserv=# alter table buyerDetails add constraint cid foreign key (customerId) references Customer(customerId);
+ALTER TABLE
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+\c dbfinserv
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10);
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+insert into buyerDetails values(505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10','laptop');
+ERROR:  syntax error at or near "2022"
+LINE 5: insert into buyerDetails values(505,3,'2022-09-13','pen'),(5...
+                                               ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+ERROR:  VALUES lists must all be the same length
+LINE 1: ...22-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'202...
+                                                             ^
+INSERT 0 5
+dbfinserv=# select * from buyerDetails;
+ customerid | userid | purhcase_date | productname 
+------------+--------+---------------+-------------
+        505 |      3 | 2022-09-13    | pen
+        501 |      1 | 2022-04-27    | book
+        504 |      2 | 2022-08-14    | pencil
+        502 |      5 | 2022-06-10    | guide
+        503 |      4 | 2022-10-10    | laptop
+(5 rows)
+
+dbfinserv=# select c.customerId,c.first_name,c.last_name,c.mobile,c.email from customer c inner join buyerDetails b on productName='laptop' and c.customerId=b.customerId;
+ customerid | first_name | last_name |   mobile   |     email     
+------------+------------+-----------+------------+---------------
+        503 | kareena    | kapoor    | 9234567810 | kar@gmail.com
+(1 row)
+
+dbfinserv=# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+dbfinserv=# delete from customer inner join buyerDetails on productName='laptop';
+ERROR:  syntax error at or near "inner"
+LINE 1: delete from customer inner join buyerDetails on productName=...
+                             ^
+dbfinserv=# delete customer from customer inner join buyerDetails on productName='laptop';
+ERROR:  syntax error at or near "customer"
+LINE 1: delete customer from customer inner join buyerDetails on pro...
+               ^
+dbfinserv=# delete from customer using buyerDetails where buyerDetails.productName='laptop';
+ERROR:  update or delete on table "customer" violates foreign key constraint "cid" on table "buyerdetails"
+DETAIL:  Key (customerid)=(501) is still referenced from table "buyerdetails".
+ERROR:  column buyerdetails.cuatomerid does not existhere buyerDetails.productName='laptop' and customer.customerId=buyerDetails.cuatomerId;
+LINE 1: ...ails.productName='laptop' and customer.customerId=buyerDetai...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "buyerdetails.customerid".
+dbfinserv=# delete from customer using buyerDetails where buyerDetails.productName='laptop' and customer.customerId=buyerDetails.customerId;
+ERROR:  update or delete on table "customer" violates foreign key constraint "cid" on table "buyerdetails"
+DETAIL:  Key (customerid)=(503) is still referenced from table "buyerdetails".
+dbfinserv=# select u.userId, u.First_name,u.mobile from Users u inner join referral r on dor='2022-09-05' and u.userId=r.userId;
+ERROR:  column r.userid does not exist
+LINE 1: ...r join referral r on dor='2022-09-05' and u.userId=r.userId;
+                                                              ^
+HINT:  Perhaps you meant to reference the column "u.userid" or the column "r.user_id".
+dbfinserv=# select u.userId, u.First_name,u.mobile from Users u inner join referral r on dor='2022-09-05' and u.userId=r.user_id;
+ userid | first_name |  mobile   
+--------+------------+-----------
+      2 | priya      | 976543218
+(1 row)
+
+dbfinserv=# create view userview as select u.First_name,u.Last_Name,u.mobile,u.email from Users u;
+CREATE VIEW
+dbfinserv=# select u.email from Users u;
+     email     
+---------------
+ abc@gmail.com
+ def@gmail.com
+ ghi@gmail.com
+ jkl@gmail.com
+ mno@gmail.com
+(5 rows)
+
+dbfinserv=# select u.email from userview;
+ERROR:  missing FROM-clause entry for table "u"
+LINE 1: select u.email from userview;
+               ^
+dbfinserv=# select u.email from userview u;
+     email     
+---------------
+ abc@gmail.com
+ def@gmail.com
+ ghi@gmail.com
+ jkl@gmail.com
+ mno@gmail.com
+(5 rows)
+
+dbfinserv=# select u.mobile from userview u;
+  mobile   
+-----------
+ 987654321
+ 976543218
+ 965432178
+ 912345678
+ 945678321
+(5 rows)
+
+dbfinserv=# drop table Users;
+ERROR:  cannot drop table users because other objects depend on it
+DETAIL:  constraint uid on table referral depends on table users
+view userview depends on table users
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+dbfinserv=# drop buyerDetails;
+ERROR:  syntax error at or near "buyerDetails"
+LINE 1: drop buyerDetails;
+             ^
+dbfinserv=# drop table buyerDetails;
+DROP TABLE
+dbfinserv=# drop table customer;
+DROP TABLE
+dbfinserv=# drop table referral;
+DROP TABLE
+dbfinserv=# drop table users;
+ERROR:  cannot drop table users because other objects depend on it
+DETAIL:  view userview depends on table users
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+dbfinserv=# drop view userview;
+DROP VIEW
+dbfinserv=# drop table users;
+DROP TABLE
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# 
+dbfinserv=# create table Users(userid int, First_Name text,Last_Name text, adress text, mobile text, email text, username text, password char(30));
+CREATE TABLE
+dbfinserv=# create table Referral(referalId int, First_name text, Last_name text, mobile text, email text, user_id int, dor date, ref_points int, status text);
+CREATE TABLE
+dbfinserv=# create table Customer(customerId int primary key,first_name text, last_name text, email text, mobile text);
+CREATE TABLE
+dbfinserv=# create table buyerDetails(customerId int, userId int, purhcase_date date, productName text);
+CREATE TABLE
+dbfinserv=# alter table Users add primary key(userid);
+ALTER TABLE
+dbfinserv=# alter table Referral add constraint uid foreign key (user_id) references Users(userId);
+ALTER TABLE
+dbfinserv=# alter table buyerDetails add constraint cid foreign key (customerId) references Customer(customerId);
+ALTER TABLE
+dbfinserv=# insert into Users values(1,'ram','mohan','pune','987654321','abc@gmail.com','ram@mohan','@ram'),(2,'priya','waikar','banglore','976543218','def@gmail.com','priya@waikar','@priya'),(3,'neha','agarwal','hyderabad','965432178','ghi@gmail.com','neha@agarwal','@neha'),(4,'amit','shah','chennai','912345678','jkl@gmail.com','amit@shah','@amit'),(5,'sunil','shetty','lucknow','945678321','mno@gmail.com','sumil@shetty','@sunil');
+INSERT 0 5
+dbfinserv=# insert into Referral values(101,'Lopa','mudra','8270286253','lopa@gmail.com','3','2022-05-23',30,'done');
+INSERT 0 1
+dbfinserv=# insert into Referral values(102,'Kiruthuck','Raja','9843433721','kiru@gmail.com','1','2022-07-3',20,'done'),(103,'Mukesh','s','9671234501','mukesh@gmail.com','2','2022-09-05',40,'done'),(104,'Joshita','Ravi','912345897','joshi@gmail.com','4','2022-01-07',89,'done'),(105,'Viswa','A','8120876532','viswa@gmail.com','5','2022-10-04',49,'done');
+INSERT 0 4
+dbfinserv=# insert into Customer values(501,'raj','kiran','raj@gmail.com','987654123'),(502,'akshay','kumar','aks@gmail.com','8901234567'),(503,'kareena','kapoor','kar@gmail.com','9234567810'),(504,'priya','darshini','priya@gmail.com','923487610'),(505,'bhavya','sri','sri@gmail.com','9216783045');
+INSERT 0 5
+dbfinserv=# insert into buyerDetails value (505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10','laptop');
+ERROR:  syntax error at or near "value"
+LINE 1: insert into buyerDetails value (505,3,'2022-09-13','pen'),(5...
+                                 ^
+dbfinserv=# insert into buyerDetails values (505,3,'2022-09-13','pen'),(501,1,'2022-04-27','book'),(504,2,'2022-08-14','pencil'),(502,5,'2022-06-10','guide'),(503,4,'2022-10-10','laptop');
+INSERT 0 5
+dbfinserv=# select sum(ref_points) as tot_num_of_pts from referral;
+ tot_num_of_pts 
+----------------
+            228
+(1 row)
+
+dbfinserv=# select c.customerId,c.first_name,c.last_name,c.mobile,c.email from customer c inner join buyerDetails b on productName='laptop' and c.customerId=b.customerId;
+ customerid | first_name | last_name |   mobile   |     email     
+------------+------------+-----------+------------+---------------
+        503 | kareena    | kapoor    | 9234567810 | kar@gmail.com
+(1 row)
+
+dbfinserv=# select u.userId, u.First_name,u.mobile from Users u inner join referral r on dor='2022-09-05' and u.userId=r.user_id;
+ userid | first_name |  mobile   
+--------+------------+-----------
+      2 | priya      | 976543218
+(1 row)
+
+dbfinserv=# create view userview as select u.First_name,u.Last_Name,u.mobile,u.email from Users u;
+CREATE VIEW
+dbfinserv=# select u.email from Users u;
+     email     
+---------------
+ abc@gmail.com
+ def@gmail.com
+ ghi@gmail.com
+ jkl@gmail.com
+ mno@gmail.com
+(5 rows)
+
+dbfinserv=# select u.email from userview u;
+     email     
+---------------
+ abc@gmail.com
+ def@gmail.com
+ ghi@gmail.com
+ jkl@gmail.com
+ mno@gmail.com
+(5 rows)
+
+dbfinserv=# select u.mobile from userview u;
+  mobile   
+-----------
+ 987654321
+ 976543218
+ 965432178
+ 912345678
+ 945678321
+(5 rows)
+
+dbfinserv=# select referalId from referral group by user_id;
+ERROR:  column "referral.referalid" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select referalId from referral group by user_id;
+               ^
+dbfinserv=# select user_id from referral group by user_id;
+ user_id 
+---------
+       3
+       5
+       4
+       2
+       1
+(5 rows)
+
+dbfinserv=# select user_id,referral_id from referral group by user_id;
+ERROR:  column "referral_id" does not exist
+LINE 1: select user_id,referral_id from referral group by user_id;
+                       ^
+HINT:  Perhaps you meant to reference the column "referral.referalid".
+dbfinserv=# select user_id,referralId from referral group by user_id;
+ERROR:  column "referralid" does not exist
+LINE 1: select user_id,referralId from referral group by user_id;
+                       ^
+HINT:  Perhaps you meant to reference the column "referral.referalid".
+dbfinserv=# select user_id,referalId from referral group by user_id;
+ERROR:  column "referral.referalid" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select user_id,referalId from referral group by user_id;
+                       ^
+dbfinserv=# select count(user_id),referalId from referral group by user_id;
+ERROR:  column "referral.referalid" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select count(user_id),referalId from referral group by user_...
+                              ^
+dbfinserv=# select count(user_id) from referral group by user_id;
+ count 
+-------
+     1
+     1
+     1
+     1
+     1
+(5 rows)
+
+dbfinserv=# update table referral set user_id=3 where referalid=101;
+ERROR:  syntax error at or near "table"
+LINE 1: update table referral set user_id=3 where referalid=101;
+               ^
+dbfinserv=# update referral set user_id=3 where referalid=101;
+UPDATE 1
+dbfinserv=# select count(user_id) from referral group by user_id;
+ count 
+-------
+     1
+     1
+     1
+     1
+     1
+(5 rows)
+
+dbfinserv=# select count(referalid) from referral group by referalid;
+ count 
+-------
+     1
+     1
+     1
+     1
+     1
+(5 rows)
+
+dbfinserv=# select * from referral;
+ referalid | first_name | last_name |   mobile   |      email       | user_id |    dor     | ref_points | status 
+-----------+------------+-----------+------------+------------------+---------+------------+------------+--------
+       102 | Kiruthuck  | Raja      | 9843433721 | kiru@gmail.com   |       1 | 2022-07-03 |         20 | done
+       103 | Mukesh     | s         | 9671234501 | mukesh@gmail.com |       2 | 2022-09-05 |         40 | done
+       104 | Joshita    | Ravi      | 912345897  | joshi@gmail.com  |       4 | 2022-01-07 |         89 | done
+       105 | Viswa      | A         | 8120876532 | viswa@gmail.com  |       5 | 2022-10-04 |         49 | done
+       101 | Lopa       | mudra     | 8270286253 | lopa@gmail.com   |       3 | 2022-05-23 |         30 | done
+(5 rows)
+
+dbfinserv=# update referral set user_id=3 where referalid=102;
+UPDATE 1
+dbfinserv=# select count(referalid) from referral group by referalid;
+ count 
+-------
+     1
+     1
+     1
+     1
+     1
+(5 rows)
+
+dbfinserv=# select count(user_id) from referral group by user_id;
+ count 
+-------
+     2
+     1
+     1
+     1
+(4 rows)
+
+dbfinserv=# select count(user_id),referalid from referral group by user_id;
+ERROR:  column "referral.referalid" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select count(user_id),referalid from referral group by user_...
+                              ^
+dbfinserv=# select count(user_id) from referral group by user_id;
+ count 
+-------
+     2
+     1
+     1
+     1
+(4 rows)
+
+dbfinserv=# 

@@ -1,0 +1,131 @@
+Last login: Fri Jan 13 15:25:03 on ttys000
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+L-XNTL4N67CH:~ lopamudrapanda$ /Library/PostgreSQL/15/scripts/runpsql.sh; exit
+Server [localhost]: 
+Database [postgres]: 
+Port [5432]: 
+Username [postgres]: postgres
+Password for user postgres: 
+psql (15.1)
+Type "help" for help.
+
+postgres=# \c dbfinserv
+You are now connected to database "dbfinserv" as user "postgres".
+dbfinserv=# create table employee1;
+ERROR:  syntax error at or near ";"
+LINE 1: create table employee1;
+                              ^
+dbfinserv=# create table employee1(id primary key not null, name, salary);
+ERROR:  syntax error at or near "primary"
+LINE 1: create table employee1(id primary key not null, name, salary...
+                                  ^
+dbfinserv=# create table employee1(id int primary key not null, name text, salar
+y int);
+CREATE TABLE
+dbfinserv=# insert into employee1 values(1,'Lopa',35000);
+INSERT 0 1
+dbfinserv=# intsert into employee1 values(2,'Mukesh',35000),(3,'Joshita',35000); 
+ERROR:  syntax error at or near "intsert"
+LINE 1: intsert into employee1 values(2,'Mukesh',35000),(3,'Joshita'...
+        ^
+dbfinserv=# insert into employee1 values(2,'Mukesh',35000),(3,'Joshita',35000);
+INSERT 0 2
+dbfinserv=# insert into employee1 values(4,'Chaitnya',35000),(5,'Kiruthick',35000);
+INSERT 0 2
+dbfinserv=# \dt employee1
+           List of relations
+ Schema |   Name    | Type  |  Owner   
+--------+-----------+-------+----------
+ public | employee1 | table | postgres
+(1 row)
+
+dbfinserv=# select * from employee1;
+ id |   name    | salary 
+----+-----------+--------
+  1 | Lopa      |  35000
+  2 | Mukesh    |  35000
+  3 | Joshita   |  35000
+  4 | Chaitnya  |  35000
+  5 | Kiruthick |  35000
+(5 rows)
+
+dbfinserv=# select avg(salary) as avg of salary from emlpoyee1;
+ERROR:  syntax error at or near "of"
+LINE 1: select avg(salary) as avg of salary from emlpoyee1;
+                                  ^
+dbfinserv=# select avg(salary) as avgsalary from emlpoyee1;
+ERROR:  relation "emlpoyee1" does not exist
+LINE 1: select avg(salary) as avgsalary from emlpoyee1;
+                                             ^
+dbfinserv=# select avg(salary) as avgsalary from employee1;
+     avgsalary      
+--------------------
+ 35000.000000000000
+(1 row)
+
+dbfinserv=# select distinct salary from employee1;
+ salary 
+--------
+  35000
+(1 row)
+
+dbfinserv=# select count(salary) from employee1 group by salary;
+ count 
+-------
+     5
+(1 row)
+
+dbfinserv=# update employee set salary=null;
+ERROR:  column "salary" of relation "employee" does not exist
+LINE 1: update employee set salary=null;
+                            ^
+dbfinserv=# update employee1 set salary=null;
+UPDATE 5
+dbfinserv=# select * from employee1;
+ id |   name    | salary 
+----+-----------+--------
+  1 | Lopa      |       
+  2 | Mukesh    |       
+  3 | Joshita   |       
+  4 | Chaitnya  |       
+  5 | Kiruthick |       
+(5 rows)
+
+dbfinserv=# select * from employee1 order by asc;
+ERROR:  syntax error at or near "asc"
+LINE 1: select * from employee1 order by asc;
+                                         ^
+dbfinserv=# select * from employee1 order by;
+ERROR:  syntax error at or near ";"
+LINE 1: select * from employee1 order by;
+                                        ^
+dbfinserv=# select * from employee1 order by name;
+ id |   name    | salary 
+----+-----------+--------
+  4 | Chaitnya  |       
+  3 | Joshita   |       
+  5 | Kiruthick |       
+  1 | Lopa      |       
+  2 | Mukesh    |       
+(5 rows)
+
+dbfinserv=# select * from employee1 order by name desc;
+ id |   name    | salary 
+----+-----------+--------
+  2 | Mukesh    |       
+  1 | Lopa      |       
+  5 | Kiruthick |       
+  3 | Joshita   |       
+  4 | Chaitnya  |       
+(5 rows)
+
+dbfinserv=# select * from employee1 where name='Lopa';
+ id | name | salary 
+----+------+--------
+  1 | Lopa |       
+(1 row)
+
+dbfinserv=# 

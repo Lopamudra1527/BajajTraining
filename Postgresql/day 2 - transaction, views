@@ -1,0 +1,191 @@
+Last login: Mon Jan 16 14:24:17 on ttys000
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+L-XNTL4N67CH:~ lopamudrapanda$ /Library/PostgreSQL/15/scripts/runpsql.sh; exit
+Server [localhost]: 
+Database [postgres]: 
+Port [5432]: 
+Username [postgres]: postgres
+Password for user postgres: 
+psql (15.1)
+Type "help" for help.
+
+postgres=# \c dbfinserv
+You are now connected to database "dbfinserv" as user "postgres".
+dbfinserv=# begin;
+BEGIN
+dbfinserv=*# update employee1 set salary=35000+5000 where id=2;
+UPDATE 1
+dbfinserv=*# savepoint my_db;
+SAVEPOINT
+dbfinserv=*# update employee1 set dept_id=3 where id=1;
+UPDATE 1
+dbfinserv=*# select * from department;
+ dept_name | dept_id 
+-----------+---------
+ cse       |       1
+ ece       |       2
+ cse       |       3
+ mech      |       4
+ cse       |       5
+(5 rows)
+
+dbfinserv=*# select * from employee1;
+ id |   name    | salary | dept_id 
+----+-----------+--------+---------
+  3 | Joshita   |  35000 |       2
+  4 | Chaitnya  |  35000 |       3
+  5 | Kiruthick |  35000 |       4
+  2 | Mukesh    |  40000 |        
+  1 | Lopa      |  35000 |       3
+(5 rows)
+
+dbfinserv=*# rollback to my_db;
+ROLLBACK
+dbfinserv=*# select * from employee1;
+ id |   name    | salary | dept_id 
+----+-----------+--------+---------
+  1 | Lopa      |  35000 |       1
+  3 | Joshita   |  35000 |       2
+  4 | Chaitnya  |  35000 |       3
+  5 | Kiruthick |  35000 |       4
+  2 | Mukesh    |  40000 |        
+(5 rows)
+
+dbfinserv=*# update employee1 set dept_id=4 where id=2;
+UPDATE 1
+dbfinserv=*# commit;
+COMMIT
+dbfinserv=# rollback my_db;
+ERROR:  syntax error at or near "my_db"
+LINE 1: rollback my_db;
+                 ^
+dbfinserv=# rollback;
+WARNING:  there is no transaction in progress
+ROLLBACK
+dbfinserv=# update employee1 set dept_id=3 where id=3;
+UPDATE 1
+dbfinserv=# begin;
+BEGIN
+dbfinserv=*# update employee1 set dept_id=4 where id=3;
+UPDATE 1
+dbfinserv=*# rollback;
+ROLLBACK
+dbfinserv=# begin;
+BEGIN
+dbfinserv=*# insert into employee1 values(6,'Chaitanya',35000,3);
+INSERT 0 1
+dbfinserv=*# select * from emplooyee1;
+ERROR:  relation "emplooyee1" does not exist
+LINE 1: select * from emplooyee1;
+                      ^
+dbfinserv=!# select * from employee1;
+ERROR:  current transaction is aborted, commands ignored until end of transaction block
+dbfinserv=!# insert into employee1 values(6,'Chaitanya',35000,3);
+ERROR:  current transaction is aborted, commands ignored until end of transaction block
+dbfinserv=!# end;
+ROLLBACK
+dbfinserv=# begin;
+BEGIN
+dbfinserv=*# insert into employee1 values(6,'Chaitanya',35000,3);
+INSERT 0 1
+dbfinserv=*# select * from employee1;
+ id |   name    | salary | dept_id 
+----+-----------+--------+---------
+  1 | Lopa      |  35000 |       1
+  4 | Chaitnya  |  35000 |       3
+  5 | Kiruthick |  35000 |       4
+  2 | Mukesh    |  40000 |       4
+  3 | Joshita   |  35000 |       3
+  6 | Chaitanya |  35000 |       3
+(6 rows)
+
+dbfinserv=*# update employee1 set name='Viswanth' where id=6;
+UPDATE 1
+dbfinserv=*# commit;
+COMMIT
+dbfinserv=# rollback;
+WARNING:  there is no transaction in progress
+ROLLBACK
+dbfinserv=# end;
+WARNING:  there is no transaction in progress
+COMMIT
+dbfinserv=# explain select * from employee1 where dept_id=4;
+                        QUERY PLAN                         
+-----------------------------------------------------------
+ Seq Scan on employee1  (cost=0.00..24.12 rows=6 width=44)
+   Filter: (dept_id = 4)
+(2 rows)
+
+dbfinserv=# create index idx_name on employee1(name);
+CREATE INDEX
+dbfinserv=# drop index idx_name;
+DROP INDEX
+dbfinserv=# create index idx_salary on employee1(salary);
+CREATE INDEX
+dbfinserv=# create index idx_name on employee1(name);
+CREATE INDEX
+dbfinserv=# \d
+           List of relations
+ Schema |    Name    | Type  |  Owner   
+--------+------------+-------+----------
+ public | department | table | postgres
+ public | employee   | table | postgres
+ public | employee1  | table | postgres
+ public | test       | table | postgres
+(4 rows)
+
+dbfinserv=# \d employee1
+              Table "public.employee1"
+ Column  |  Type   | Collation | Nullable | Default 
+---------+---------+-----------+----------+---------
+ id      | integer |           | not null | 
+ name    | text    |           |          | 
+ salary  | integer |           |          | 
+ dept_id | integer |           |          | 
+Indexes:
+    "employee1_pkey" PRIMARY KEY, btree (id)
+    "idx_name" btree (name)
+    "idx_salary" btree (salary)
+Foreign-key constraints:
+    "employee1_dept_id_fkey" FOREIGN KEY (dept_id) REFERENCES department(dept_id)
+
+dbfinserv=# explain select * from employee1 where name='Lopa';
+                        QUERY PLAN                        
+----------------------------------------------------------
+ Seq Scan on employee1  (cost=0.00..1.07 rows=1 width=44)
+   Filter: (name = 'Lopa'::text)
+(2 rows)
+
+dbfinserv=# explain select * from employee1 where id=4;
+                        QUERY PLAN                        
+----------------------------------------------------------
+ Seq Scan on employee1  (cost=0.00..1.07 rows=1 width=44)
+   Filter: (id = 4)
+(2 rows)
+
+dbfinserv=# ccreate view_name_id as select id,name from employee1 where salary>35000;
+ERROR:  syntax error at or near "ccreate"
+LINE 1: ccreate view_name_id as select id,name from employee1 where ...
+        ^
+dbfinserv=# create view_name_id as select id,name from employee1 where salary>35000;
+ERROR:  syntax error at or near "view_name_id"
+LINE 1: create view_name_id as select id,name from employee1 where s...
+               ^
+dbfinserv=# create view view_name_id as select id,name from employee1 where salary>35000;
+CREATE VIEW
+dbfinserv=# select * from view_name_id;
+ id |  name  
+----+--------
+  2 | Mukesh
+(1 row)
+
+dbfinserv=# drop view view_name_id;
+DROP VIEW
+dbfinserv=# select * from view_name_id;
+ERROR:  relation "view_name_id" does not exist
+LINE 1: select * from view_name_id;
+                      ^
+dbfinserv=# 
