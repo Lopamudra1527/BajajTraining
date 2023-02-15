@@ -1,0 +1,1 @@
+package com.hibernateRelations.model;
